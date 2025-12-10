@@ -222,16 +222,7 @@ mvn javadoc:javadoc
 - `junit-jupiter` - модульное тестирование
 - `javafx-controls` - графический интерфейс
 
-## Лицензия
-
-Этот проект создан в учебных целях.
-
 ## Автор
 
-SHYPU4KA47
-
-## Ссылки
-
-- [OpenLibrary API Documentation](https://openlibrary.org/developers/api)
-- [GitHub Repository](https://github.com/SHYPU4KA47/shypu4)
+SHYPU4KA
 
