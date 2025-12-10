@@ -1,0 +1,64 @@
+@startuml
+!theme plain
+skinparam classAttributeIconSize 0
+
+class OpenLibraryClient {
+  - API_URL : String
+  - TIMEOUT_SECONDS : int
+  - log : Logger
+  - httpClient : HttpClient
+  - mapper : ObjectMapper
+  + main(String[] args) : void
+  + searchAndPrint(String query, int limit) : void
+  + searchFormatted(String query, int limit) : List<String>
+  - fetchDocs(String query) : List<Doc>
+  # formatDoc(Doc doc) : String
+}
+
+class SearchResponse {
+  + docs : List<Doc>
+}
+
+class Doc {
+  + title : String
+  + authorName : List<String>
+  + firstPublishYear : Integer
+}
+
+class BookSearchGUI {
+  - client : OpenLibraryClient
+  - searchField : TextField
+  - resultArea : TextArea
+  - limitSpinner : Spinner<Integer>
+  - searchButton : Button
+  + start(Stage primaryStage) : void
+  - createUI() : VBox
+  - createControlsPanel() : HBox
+  - performSearch() : void
+  - showAlert(String title, String message) : void
+  + main(String[] args) : void
+}
+
+class OpenLibraryClientTest {
+  + testFormatDoc() : void
+  + testFormatDocWithNullAuthor() : void
+}
+
+OpenLibraryClient *-- SearchResponse : содержит
+SearchResponse *-- Doc : содержит
+BookSearchGUI --> OpenLibraryClient : использует
+OpenLibraryClientTest ..> OpenLibraryClient : тестирует
+
+note right of OpenLibraryClient
+  Основной класс приложения.
+  Выполняет HTTP-запросы к OpenLibrary API
+  и обрабатывает результаты поиска.
+end note
+
+note right of BookSearchGUI
+  Графический интерфейс на JavaFX.
+  Использует OpenLibraryClient для поиска.
+end note
+
+@enduml
+
